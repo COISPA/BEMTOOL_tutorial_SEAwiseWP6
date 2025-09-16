@@ -7,7 +7,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Isabella Bitetto (Fondazione COISPA)">
-<meta name="dcterms.date" content="2025-09-11">
 
 <title>SEAwise – BEMTOOL tutorial</title>
 <style>
@@ -155,15 +154,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-<style>
-  :root { --bs-body-font-size: 1.125rem; }  /* ≈ 18px se base 16px */
-  #TOC, nav#toc { font-size: 0.95rem; }
-  h1.title { display: none; }
-  .title-row{ display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:.5rem 0 1rem; }
-  .title-row h1{ margin:0; font-size:2.2rem; line-height:1.1; color: var(--bs-heading-color, #0b7285); }
-  .title-row img{ height:96px; }
-  @media (max-width:576px){ .title-row{ flex-direction:column; align-items:flex-start; } .title-row img{ height:64px; } }
-</style>
 
 
 <link rel="stylesheet" href="styles-quarto.css">
@@ -221,14 +211,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#launching-the-model-and-running-the-simulation-part-from-the-gui" id="toc-launching-the-model-and-running-the-simulation-part-from-the-gui" class="nav-link" data-scroll-target="#launching-the-model-and-running-the-simulation-part-from-the-gui">Launching the model and running the simulation part from the GUI</a>
   <ul>
   <li><a href="#key-indicators-hindcast" id="toc-key-indicators-hindcast" class="nav-link" data-scroll-target="#key-indicators-hindcast">Key Indicators (hindcast)</a></li>
+  <li><a href="#comparison-with-the-stock-assessment-results" id="toc-comparison-with-the-stock-assessment-results" class="nav-link" data-scroll-target="#comparison-with-the-stock-assessment-results">Comparison with the stock assessment results</a></li>
   </ul></li>
-  <li><a href="#comparison-with-the-stock-assessment-results" id="toc-comparison-with-the-stock-assessment-results" class="nav-link" data-scroll-target="#comparison-with-the-stock-assessment-results">Comparison with the stock assessment results</a>
+  <li><a href="#running-forecast" id="toc-running-forecast" class="nav-link" data-scroll-target="#running-forecast">Running forecast</a>
   <ul>
-  <li><a href="#running-forecast" id="toc-running-forecast" class="nav-link" data-scroll-target="#running-forecast">Running forecast</a></li>
   <li><a href="#how-to-integrate-climate-change-through-emsrr" id="toc-how-to-integrate-climate-change-through-emsrr" class="nav-link" data-scroll-target="#how-to-integrate-climate-change-through-emsrr">How to integrate climate change through EMSRR</a></li>
-  </ul></li>
   <li><a href="#modify-rfss-script-with-the-coefficients-of-the-emsrr" id="toc-modify-rfss-script-with-the-coefficients-of-the-emsrr" class="nav-link" data-scroll-target="#modify-rfss-script-with-the-coefficients-of-the-emsrr">Modify RFSS script with the coefficients of the EMSRR</a></li>
   <li><a href="#running-the-climate-change-scenarios" id="toc-running-the-climate-change-scenarios" class="nav-link" data-scroll-target="#running-the-climate-change-scenarios">Running the climate change scenarios</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -255,12 +245,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           </div>
   </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">September 11, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -270,9 +254,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div style="text-align:center; margin:8px 0 12px;">
-<p><img src="seawise_logo_fullcolour.png" alt="SEAwise logo" style="height:300px;"></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Compiled on 16/09/2025, 11:49</code></pre>
 </div>
+</div>
+<!-- Logo in the title -->
+<style>
+/* Make the title line a flex row with the logo on the left */
+.title-with-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;              /* spacing between logo and text */
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.title-with-logo img {
+  width: 120px;           /* adjust logo size as needed */
+  height: auto;
+}
+</style>
+<script>
+// Wrap the H1.title with a container and prepend the logo to its left
+document.addEventListener("DOMContentLoaded", function(){
+  // find the auto-generated title element
+  var h1 = document.querySelector("h1.title");
+  if(!h1) return;
+
+  // create wrapper
+  var wrap = document.createElement("div");
+  wrap.className = "title-with-logo";
+
+  // create logo
+  var img = document.createElement("img");
+  img.src = "seawise_logo_fullcolour.png";   // relative path from Rmd root
+  img.alt = "SEAwise logo";
+
+  // insert: wrap replaces h1, then put logo + h1 inside wrap
+  h1.parentNode.insertBefore(wrap, h1);
+  wrap.appendChild(img);
+  wrap.appendChild(h1);
+});
+</script>
+<!-- Links -->
+<div id="header-links">
+<p><a href="https://seawiseproject.org/" target="_blank"> <img src="seawise_logo_fullcolour.png" width="20" height="22" style="margin-right:6px; vertical-align:middle;"> SEAwise Website </a> <a href="https://github.com/ices-tools-dev/SEAwise" target="_blank"> <img src="github.svg" width="20" height="22" style="margin-right:6px; vertical-align:middle;"> SEAwise Github </a></p>
+</div>
+<!-- start of the script -->
 <section id="introduction" class="level1">
 <h1>Introduction</h1>
 <p>BEMTOOL is an integrated bioeconomic modelling tool that follows a multi-fleet and multiple species approach, simulating the effects of management scenarios on stocks and fisheries (<a href="https://www.sciencedirect.com/science/article/abs/pii/S0308597X1400298X">Rossetto et al.&nbsp;(2015)</a> and <a href="https://cdnsciencepub.com/doi/10.1139/cjfas-2024-0382">Bitetto et al.(2025)</a>). Such effects in mixed fisheries are measured by a suite of indicators with associated uncertainty. BEMTOOL was previously implemented, within FAIRSEA project (https://www.italy-croatia.eu/web/fairsea), in the Adriatic and western Ionian Seas (GFCM Geographical Sub Areas - GSAs 17, 18 and 19, Figure 1) to inform and support the modelling of indicators, targets and limits, linked to the management of key stocks: European hake (HKE), red mullet (MUT) and deep water rose shrimp (DPS).</p>
@@ -303,71 +331,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>from Cran:gridExtra, akima, stringr, Hmisc, timeDate,reshape, scales, FLBRP</p>
 <p>from http://flrproject.org/R: FLCore, ggplot2, FLasher</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterators</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"iterators"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"iterators"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLCore"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#install.packages("FLCore",repos="http://flrproject.org/R")</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLCore"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"ggplot2"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"gridExtra"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"gridExtra"</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"akima"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"akima"</span>)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"stringr"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"stringr"</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"RGtk2"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"RGtk2"</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"Hmisc"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"Hmisc"</span>)</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"timeDate"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"timeDate"</span>)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"reshape"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"reshape"</span>)</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"scales"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"scales"</span>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"tryCatchLog"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"tryCatchLog"</span>)</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLasher"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"FLasher"</span>,<span class="at">repos=</span><span class="st">"http://flrproject.org/R"</span>)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLBRP"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>   <span class="co"># install.packages("FLBRP",repos="http://flrproject.org/R")</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLBRP"</span>)</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLasher"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>   <span class="co"># install.packages("FLBRP",repos="http://flrproject.org/R")</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLasher"</span>)</span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterators</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"iterators"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"iterators"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLCore"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#install.packages("FLCore",repos="http://flrproject.org/R")</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLCore"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"ggplot2"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"gridExtra"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"gridExtra"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"akima"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"akima"</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"stringr"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"stringr"</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"RGtk2"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"RGtk2"</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"Hmisc"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"Hmisc"</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"timeDate"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"timeDate"</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"reshape"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"reshape"</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"scales"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"scales"</span>)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"tryCatchLog"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"tryCatchLog"</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLasher"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"FLasher"</span>,<span class="at">repos=</span><span class="st">"http://flrproject.org/R"</span>)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLBRP"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>   <span class="co"># install.packages("FLBRP",repos="http://flrproject.org/R")</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLBRP"</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span>(<span class="st">"FLasher"</span> <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[,<span class="dv">1</span>])) {</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>   <span class="co"># install.packages("FLBRP",repos="http://flrproject.org/R")</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"flr/FLasher"</span>)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="rgtk2-installation" class="level1">
@@ -394,32 +422,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Import the library again</p></li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TO DO just the FIRST time you run BEMTOOL!</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- "\\gtk+-bundle_2.22.1-20101229_win64"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(wd)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.setenv(PATH = "C:\\Training\\gtk+-bundle_2.22.1-20101229_win64")</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("https://access.togaware.com/RGtk2_2.20.36.2.zip", repos=NULL)</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RGtk2)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ALADYMTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TO DO just the FIRST time you run BEMTOOL!</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#wd &lt;- "\\gtk+-bundle_2.22.1-20101229_win64"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd(wd)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sys.setenv(PATH = "C:\\Training\\gtk+-bundle_2.22.1-20101229_win64")</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("https://access.togaware.com/RGtk2_2.20.36.2.zip", repos=NULL)</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RGtk2)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ALADYMTools)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="launching-the-model-and-running-the-simulation-part-from-the-gui" class="level1">
-<h1>Launching the model and running the simulation part from the GUI</h1>
+<section id="launching-the-model-and-running-the-simulation-part-from-the-gui" class="level1 tabset">
+<h1 class="tabset">Launching the model and running the simulation part from the GUI</h1>
+<p>Make sure your PC’s locale settings are: ‘;’ as the list separator, ‘.’ as the decimal separator, and a space as the digit-grouping (thousands) separator.</p>
 <p>Pay attention to copy on C disk the folder Training as it is.</p>
 <p>Then copy in the console the code below, updating your working directory path.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">&lt;-</span> <span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">BMT_Nov2024"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(wd)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#source("BEMTOOL.r")</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># activate_main_w()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <ol type="1">
 <li>When BEMTOOL GUI will appears, click on “LOAD case study definition” button and select the file “INPUT/bmtconfigSimulation.csv”;</li>
 </ol>
@@ -722,9 +742,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
-<section id="comparison-with-the-stock-assessment-results" class="level1">
-<h1>Comparison with the stock assessment results</h1>
+<section id="comparison-with-the-stock-assessment-results" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-with-the-stock-assessment-results">Comparison with the stock assessment results</h2>
 <p>BEMTOOL utilises the main stock assessment input and results to replicate the stocks by month.</p>
 <p>To create a BEMTOOL application from scratch refer to the script available at: https://github.com/Isabella84/BEMTOOL2.5/tree/master (script for BEMTOOL parameterization).</p>
 <p>The first step for completing the conditioning of the model is to compare the stock assessment results, in terms of SSB, F and catch, with the same indicators derived from the stocks replicated by BEMTOOL using the stock assessment results.</p>
@@ -741,8 +760,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div style="text-align:center; font-weight:300; margin-bottom:0.5rem;">
 <p>Figure 3 - Example of stock replicated from SS3 stock assessment results</p>
 </div>
-<section id="running-forecast" class="level2">
-<h2 class="anchored" data-anchor-id="running-forecast">Running forecast</h2>
+</section>
+</section>
+<section id="running-forecast" class="level1 tabset">
+<h1 class="tabset">Running forecast</h1>
 <p>Once that the diagnosis was loaded, click on “Load scenario configuration” and select the file bmtconfigForecast.csv. It is set a SQ scenario.</p>
 <p>To parameterize all the economic functions in the projections, refer to the <a href="https://github.com/ices-tools-dev/SEAwise_ecoMSE/blob/main/BEMTOOL/BEMTOOL%202%200%20-%20User%20Handbook_29052015_DRAFT.pdf">BEMTOOL manual</a>. Consider that the for parameterizing the fish price functions and the variable costs, a dedicated tutorial was developed <a href="https://coispa.github.io/Fish-price-and-variable-costs/Enhanced_fishprice_fuelcosts_submodels.html">SEAwise – Fish price &amp; Variable costs</a>.</p>
 <p>Several management strategies can be simulated in BEMTOOL, also in combination with the impact of climate change on recruitment:</p>
@@ -758,7 +779,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p align="center">
 <img src="smartGUI.png" width="90%">
 </p>
-</section>
 <section id="how-to-integrate-climate-change-through-emsrr" class="level2">
 <h2 class="anchored" data-anchor-id="how-to-integrate-climate-change-through-emsrr">How to integrate climate change through EMSRR</h2>
 <p>To integrate the environmental variables, and then the climate, on the stock recruitment relationships and in the projections, SEAwise BEMTOOL model built on the work made in WP3, described in <a href="https://cdnsciencepub.com/doi/10.1139/cjfas-2024-0382">Bitetto et al.(2025)</a>.</p>
@@ -778,19 +798,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(BMT_SPECIES[ALADYM_spe]<span class="sc">==</span><span class="st">"M.mer1718"</span> ){</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">HKE1718_50_500_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">Adriatic_INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">HKE1718_50_500_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (BMT_SPECIES[ALADYM_spe]<span class="sc">==</span><span class="st">"M.mer19"</span> ){</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">HKE19_50_500_NoCC_bia_adj_month_2.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">Adriatic_INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">HKE19_50_500_NoCC_bia_adj_month_2.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (BMT_SPECIES[ALADYM_spe]<span class="sc">==</span><span class="st">"M.bar1718"</span> ){</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">MUT1718_10-200_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">Adriatic_INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">MUT1718_10-200_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (BMT_SPECIES[ALADYM_spe]<span class="sc">==</span><span class="st">"M.bar19"</span> ){</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">MUT19_10_200_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">Adriatic_INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">MUT19_10_200_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (BMT_SPECIES[ALADYM_spe]<span class="sc">==</span><span class="st">"P.lon171819"</span> ){</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">DPS17181920_50_500_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  ENV<span class="ot">&lt;&lt;-</span><span class="fu">read.table</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Training</span><span class="sc">\\</span><span class="st">Adriatic_INPUT</span><span class="sc">\\</span><span class="st">ENVIRONMENTAL_GRIDS</span><span class="sc">\\</span><span class="st">DPS17181920_50_500_NoCC_bia_adj_month.csv"</span>,<span class="at">sep=</span><span class="st">";"</span>,<span class="at">header=</span>T)  </span>
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ENV)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -804,9 +824,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>This table could potentially contain different values for each month in the year.</p>
 </section>
-</section>
-<section id="modify-rfss-script-with-the-coefficients-of-the-emsrr" class="level1">
-<h1>Modify RFSS script with the coefficients of the EMSRR</h1>
+<section id="modify-rfss-script-with-the-coefficients-of-the-emsrr" class="level2">
+<h2 class="anchored" data-anchor-id="modify-rfss-script-with-the-coefficients-of-the-emsrr">Modify RFSS script with the coefficients of the EMSRR</h2>
 <p>In the function containing the equations of the SRR, we included all the coefficients by stock except a and b (that are in the grid defined above).</p>
 <p>For the estimation of the EMSRR coefficients on your own data, refer to the <a href="https://github.com/ices-tools-dev/SEAwise_ecoMSE/tree/main/recruitment">WP3 tutorial</a>.</p>
 <p>Folder: path reported in the code below.</p>
@@ -835,8 +854,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="running-the-climate-change-scenarios" class="level1">
-<h1>Running the climate change scenarios</h1>
+<section id="running-the-climate-change-scenarios" class="level2">
+<h2 class="anchored" data-anchor-id="running-the-climate-change-scenarios">Running the climate change scenarios</h2>
 <p>Come back to the BEMTOOL GUI and, clicking on “Load scenario configuration” button, you can select the file “INPUT/bmtconfigForecast.csv”.</p>
 <p>In the GUI can verify if the input data are correctly read, and you can modify the name of the scenario according to the setting defined in the chunk “modify the RCP scenario”.</p>
 <p>In the OUTPUT folder you will find all your saved results, in tables (.csv) and plots.</p>
@@ -858,6 +877,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
